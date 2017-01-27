@@ -1,7 +1,7 @@
 state("gta_sa")
 {
 	int 	globalGameTimer : 0x77CB84;
-	int 	gameState		: 0x88D4C0;
+	int 	gameState	: 0x88D4C0;
 	byte 	playerInMenu	: 0x7A67A4;
 }
 
