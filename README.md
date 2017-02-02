@@ -1,4 +1,4 @@
-# san-andreas-loadremoval-for-livesplit
+# san-andreas-loadremoval-for-livesplit `1.0`
 
 An asl script to remove loading times in GTA: San Andreas for [livesplit](http://livesplit.github.io).
 
