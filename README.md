@@ -6,12 +6,13 @@
 
 An asl script to remove loading times in GTA: San Andreas for [livesplit](http://livesplit.github.io).
 
+# Support
+
 The current version supports only:
-* 1.00 EU/US
-* 1.01 EU/US
-* 1.01 PL(?)
-* 3.00 STEAM
-* newsteam_r2
+
+|           | 1.0 EU | 1.0 DE | 1.0 US | 1.01 EU | 1.01 DE | 1.01 PL? | 1.01 US | 2.0 | [3.0 STEAM](https://steamcommunity.com/app/12120/discussions/0/34096318964479523/) | r1 STEAM | [r2 STEAM](http://store.steampowered.com/app/12120/) | [WinStore](https://www.microsoft.com/en-us/store/p/grand-theft-auto-san-andreas/9wzdncrfj1zn) |
+|-----------|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|
+| Supported |    ✓   |        |    ✓   |    ✓    |         |      ✓      |    ✓    |     |  ✓  |             |      ✓      |               |
 
 To-do:
 * Add support for German versions (1.0 DE, 1.01 DE).
@@ -21,3 +22,7 @@ Known bugs:
 * Game pauses after ALT-TAB'ing straight from the game. Solution: NEVER alt-tab while in game (Open pause menu first, then alt-tab).
 * If games doesn't use LOAD_MODELS_NOW function to load stuff, the script doesn't always detect loads.
 * Lag might pause the timer even though no stuff is being loaded (?).
+
+# Demo:
+
+[![Preview](https://j.gifs.com/66v8xl.gif)](https://www.youtube.com/watch?v=SZ18yIhLc6w)
