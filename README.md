@@ -19,3 +19,5 @@ To-do:
 
 Known bugs:
 * Game pauses after ALT-TAB'ing straight from the game. Solution: NEVER alt-tab while in game (Open pause menu first, then alt-tab).
+* If games doesn't use LOAD_MODELS_NOW function to load stuff, the script doesn't always detect loads.
+* Lag might pause the timer even though no stuff is being loaded (?).
