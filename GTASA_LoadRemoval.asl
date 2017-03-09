@@ -5,7 +5,7 @@
  * @game	   Grand Theft Auto: San Andreas
  * @category   Load Time Removal
  * @author     Karolis Vaikutis <speedrun.com/user/Blantas>
- * @version    1.0
+ * @version    1.1
  * @link       https://github.com/Blantas/san-andreas-loadremoval-for-livesplit
 
  * @supported  1.00 EU/US
@@ -14,8 +14,7 @@
                3.00 STEAM
 			   newsteam_r2
 			   
- * @todo	   Detect if game has focus.
-			   Add support for German (1.0 and 1.01) versions.	   
+ * @todo	   Add support for German (1.0 and 1.01) versions.	   
  */
 
 /**
@@ -29,6 +28,7 @@ state("gta_sa", "1.00_EU")
 	int 	gameState		: 0x88D4C0;
 	byte 	playerInMenu	: 0x7A67A4;
 	int 	versionCheck 	: 0x4245BC; 
+	byte	hasFocus		: 0x4D621C;
 }
 
 state("gta_sa", "1.00_US")
@@ -37,6 +37,7 @@ state("gta_sa", "1.00_US")
 	int 	gameState		: 0x88D4C0;
 	byte 	playerInMenu	: 0x7A67A4;
 	int 	versionCheck 	: 0x42457C;
+	byte	hasFocus		: 0x4D621C;
 }
 
 /**
@@ -50,6 +51,7 @@ state("gta_sa", "1.01_EU")
 	int 	gameState		: 0x88FC80;
 	byte 	playerInMenu	: 0x7a8e24;
 	int 	versionCheck 	: 0x42533C;
+	byte	hasFocus		: 0x4D88B8;
 }
 
 state("gta_sa", "1.01_US") 
@@ -58,6 +60,7 @@ state("gta_sa", "1.01_US")
 	int 	gameState		: 0x88FC80;
 	byte 	playerInMenu	: 0x7a8e24;
 	int 	versionCheck 	: 0x4252FC;
+	byte	hasFocus		: 0x4D88B8;
 }
 
 /**
@@ -72,6 +75,7 @@ state("gta_sa", "1.01_PL")
 	int 	gameState		: 0x900F30;
 	byte 	playerInMenu	: 0x7E0D1C;
 	int 	versionCheck 	: 0x0;
+	byte	hasFocus		: 0x54B5B4;
 }
 
 /**
@@ -86,6 +90,7 @@ state("gta-sa", "3.00_STEAM")
 	int 	gameState		: 0x9187F0;
 	byte 	playerInMenu	: 0x83315C;
 	int 	versionCheck 	: 0x45EC4A;
+	byte	hasFocus		: 0x54DB20;
 }
 
 state("testapp", "3.00_STEAM")
@@ -94,6 +99,7 @@ state("testapp", "3.00_STEAM")
 	int 	gameState		: 0x9187F0;
 	byte 	playerInMenu	: 0x83315C;
 	int 	versionCheck 	: 0x45EC4A;
+	byte	hasFocus		: 0x54DB20;
 }
 
 /**
@@ -108,6 +114,7 @@ state("gta-sa", "newsteam_r2")
 	int 	gameState		: 0x919020;
 	byte 	playerInMenu	: 0x7FAF2C;
 	int 	versionCheck 	: 0x0;
+	byte	hasFocus		: 0x54DB20;
 }
 
 startup
@@ -175,8 +182,14 @@ isLoading
 	// Checking game state (9 -> when gta.dat was loaded)
 	if(current.gameState != 9) return false;
 	
+	// Checking if game window has focus (helps detecting alttabing)
+	if(current.hasFocus != 1 || (current.hasFocus == 1 && old.hasFocus == 0)) return false;
+	
 	// Checking if PAUSE MENU is active
 	if(current.playerInMenu != 0) return false;
+	
+	// Checking 
+	// TO-DO check CTimer::ms_fTimeStepOld and CTimer::ms_fTimeStep > 3 to detect lag
 	
 	// Comparing previous and current global timer values
 	return current.globalGameTimer == old.globalGameTimer;
