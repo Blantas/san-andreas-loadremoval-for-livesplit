@@ -1,10 +1,25 @@
-# san-andreas-loadremoval-for-livesplit `1.1`
+# san-andreas-loadremoval-for-livesplit [`1.2`](https://github.com/Blantas/san-andreas-loadremoval-for-livesplit/releases)
 
-| Total downloads | Latest release |
-| :---: | :---: | :---: | :---: |
-|  [![All Releases](https://img.shields.io/github/downloads/Blantas/san-andreas-loadremoval-for-livesplit/total.svg?maxAge=86400)](https://github.com/Blantas/san-andreas-loadremoval-for-livesplit/releases)  |  [![latest release](https://img.shields.io/github/release/Blantas/san-andreas-loadremoval-for-livesplit.svg?maxAge=86400)](https://github.com/Blantas/san-andreas-loadremoval-for-livesplit/releases) <br> [![Github Releases](https://img.shields.io/github/downloads/Blantas/san-andreas-loadremoval-for-livesplit/latest/total.svg?maxAge=86400)](https://github.com/Blantas/san-andreas-loadremoval-for-livesplit/releases)  | 
+| Total downloads        | Latest release           |
+| ------------- |:-------------:|
+| [![All Releases](https://img.shields.io/github/downloads/Blantas/san-andreas-loadremoval-for-livesplit/total.svg?maxAge=86400)](https://github.com/Blantas/san-andreas-loadremoval-for-livesplit/releases)      | [![latest release](https://img.shields.io/github/release/Blantas/san-andreas-loadremoval-for-livesplit.svg)](https://github.com/Blantas/san-andreas-loadremoval-for-livesplit/releases) <br> [![Github Releases](https://img.shields.io/github/downloads/Blantas/san-andreas-loadremoval-for-livesplit/latest/total.svg)](https://github.com/Blantas/san-andreas-loadremoval-for-livesplit/releases) |
 
 An asl script to remove loading times in GTA: San Andreas for [livesplit](http://livesplit.github.io).
+
+# How it works
+
+An asl script tracks a few memory values of the game. When all of them meet specific condition, script asssumes that loading is being done and game is paused. Currently the script is checking for:
+
+* if LoadAllRequestedModels() function is active (happens when game is loading all models which are in requested_models_to_load array);
+* if LoadScene() function is active (probably not needed since it calls LoadAllRequestedModels());
+* ingame timer hasn't changed because of:
+  * a photo taken with a camera being saved to a harddrive;
+  * cutscene data being loaded or deleted;
+  * game rebuilding player's model;
+  * shopping data of items to buy being loaded (reading from shopping.dat);
+  * something related to Trip Skip happens (probably not needed since it calls LoadScene() and LoadAllRequestedModels()).
+  
+The livesplit timer doesn't get paused if you alttab of the game or if you exit the game.
 
 # Support
 
@@ -17,10 +32,11 @@ The current version supports only:
 To-do:
 * Add support for German versions (1.0 DE, 1.01 DE).
 * Add support for 2.00 version.
+* Detect loading during initial loading screen.
+* Rewrite asl script as a dll and add some adjustable settings to control lag detection.
 
 Known bugs:
-* If games doesn't use LOAD_MODELS_NOW function to load stuff, the script doesn't always detect loads.
-* Lag might pause the timer even though no stuff is being loaded (?).
+* ?
 
 # Demo:
 
