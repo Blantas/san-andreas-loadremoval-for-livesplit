@@ -5,7 +5,7 @@
  * @game	   Grand Theft Auto: San Andreas
  * @category   Load Time Removal
  * @author     Karolis Vaikutis <speedrun.com/user/Blantas>
- * @version    1.1
+ * @version    1.3
  * @link       https://github.com/Blantas/san-andreas-loadremoval-for-livesplit
 
  * @supported  1.00 EU/US
@@ -25,19 +25,35 @@
 state("gta_sa", "1.00_EU")
 {
 	int 	globalGameTimer : 0x77CB84;
+	
 	int 	gameState		: 0x88D4C0;
 	byte 	playerInMenu	: 0x7A67A4;
-	int 	versionCheck 	: 0x4245BC; 
 	byte	hasFocus		: 0x4D621C;
+	
+	byte	codePause		: 0x77CB48;
+	byte	userPause		: 0x77CB49;
+	
+	float	ms_fTimeStep	: 0x77Cb5C;
+	
+	byte	loadingModels	: 0x565538;
+	byte	loadingScene	: 0x5654BD;
 }
 
 state("gta_sa", "1.00_US")
 {
 	int 	globalGameTimer : 0x77CB84;
+	
 	int 	gameState		: 0x88D4C0;
 	byte 	playerInMenu	: 0x7A67A4;
-	int 	versionCheck 	: 0x42457C;
 	byte	hasFocus		: 0x4D621C;
+	
+	byte	codePause		: 0x77CB48;
+	byte	userPause		: 0x77CB49;
+	
+	float	ms_fTimeStep	: 0x77Cb5C;
+	
+	byte	loadingModels	: 0x565538;
+	byte	loadingScene	: 0x5654BD;
 }
 
 /**
@@ -48,19 +64,35 @@ state("gta_sa", "1.00_US")
 state("gta_sa", "1.01_EU")
 {
 	int 	globalGameTimer : 0x77f204;
+	
 	int 	gameState		: 0x88FC80;
 	byte 	playerInMenu	: 0x7a8e24;
-	int 	versionCheck 	: 0x42533C;
 	byte	hasFocus		: 0x4D88B8;
+	
+	byte	codePause		: 0x77F1C8;
+	byte	userPause		: 0x77F1C9;
+	
+	float	ms_fTimeStep	: 0x77F1DC;
+	
+	byte	loadingModels	: 0x567BB8;
+	byte	loadingScene	: 0x567B3D;
 }
 
 state("gta_sa", "1.01_US") 
 {
 	int 	globalGameTimer : 0x77f204;
+	
 	int 	gameState		: 0x88FC80;
 	byte 	playerInMenu	: 0x7a8e24;
-	int 	versionCheck 	: 0x4252FC;
 	byte	hasFocus		: 0x4D88B8;
+	
+	byte	codePause		: 0x77F1C8;
+	byte	userPause		: 0x77F1C9;
+	
+	float	ms_fTimeStep	: 0x77F1DC;
+	
+	byte	loadingModels	: 0x567BB8;
+	byte	loadingScene	: 0x567B3D;
 }
 
 /**
@@ -74,8 +106,15 @@ state("gta_sa", "1.01_PL")
 	int 	globalGameTimer : 0x7f7b38;
 	int 	gameState		: 0x900F30;
 	byte 	playerInMenu	: 0x7E0D1C;
-	int 	versionCheck 	: 0x0;
 	byte	hasFocus		: 0x54B5B4;
+	
+	byte	codePause		: 0x7F7AF9;
+	byte	userPause		: 0x7F7AFA;
+	
+	float	ms_fTimeStep	: 0x7F7B10;
+	
+	byte	loadingModels	: 0x5DAF00;
+	byte	loadingScene	: 0x5DAE99;
 }
 
 /**
@@ -89,8 +128,15 @@ state("gta-sa", "3.00_STEAM")
 	int 	globalGameTimer : 0x80f538;
 	int 	gameState		: 0x9187F0;
 	byte 	playerInMenu	: 0x83315C;
-	int 	versionCheck 	: 0x45EC4A;
 	byte	hasFocus		: 0x54DB20;
+	
+	byte	codePause		: 0x80F4F9;
+	byte	userPause		: 0x80F4FA;
+	
+	float	ms_fTimeStep	: 0x80F510;
+	
+	byte	loadingModels	: 0x5DA8C4;
+	byte	loadingScene	: 0x5DA859;
 }
 
 state("testapp", "3.00_STEAM")
@@ -98,8 +144,15 @@ state("testapp", "3.00_STEAM")
 	int 	globalGameTimer : 0x80f538;
 	int 	gameState		: 0x9187F0;
 	byte 	playerInMenu	: 0x83315C;
-	int 	versionCheck 	: 0x45EC4A;
 	byte	hasFocus		: 0x54DB20;
+	
+	byte	codePause		: 0x80F4F9;
+	byte	userPause		: 0x80F4FA;
+	
+	float	ms_fTimeStep	: 0x80F510;
+	
+	byte	loadingModels	: 0x5DA8C4;
+	byte	loadingScene	: 0x5DA859;
 }
 
 /**
@@ -113,8 +166,15 @@ state("gta-sa", "newsteam_r2")
 	int 	globalGameTimer : 0x80FD74;
 	int 	gameState		: 0x919020;
 	byte 	playerInMenu	: 0x7FAF2C;
-	int 	versionCheck 	: 0x0;
 	byte	hasFocus		: 0x54DB20;
+	
+	byte	codePause		: 0x80FD39;
+	byte	userPause		: 0x80FD3A;
+	
+	float	ms_fTimeStep	: 0x80FD50;
+	
+	byte	loadingModels	: 0x5DD100;
+	byte	loadingScene	: 0x5DD099;
 }
 
 startup
@@ -122,15 +182,15 @@ startup
 	// How often script checks game values
 	refreshRate = 20;
 	
-	// Version name, (module size, address to check while identifying version)
+	// Version name, (module size, address to check while identifying version, version number)
 	vars.gameVersions = new Dictionary<string,List<int>> {
-		{"1.00_US",		new List<int> {18313216, 	0x42457C}},
-		{"1.00_EU",		new List<int> {18313216, 	0x4245BC}},
-		{"1.01_US", 	new List<int> {34471936, 	0x4252FC}},
-		{"1.01_EU",		new List<int> {34471936, 	0x42533C}},
-		{"1.01_PL",		new List<int> {9621504, 	0x0		}},
-		{"3.00_STEAM",	new List<int> {9691136, 	0x45EC4A}},
-		{"newsteam_r2",	new List<int> {9981952, 	0x0		}}
+		{"1.00_US",		new List<int> {18313216, 	0x42457C,	38079}},
+		{"1.00_EU",		new List<int> {18313216, 	0x4245BC,	38079}},
+		{"1.01_US", 	new List<int> {34471936, 	0x4252FC,	38079}},
+		{"1.01_EU",		new List<int> {34471936, 	0x42533C,	38079}},
+		{"1.01_PL",		new List<int> {9621504, 	0x0		,	0}},
+		{"3.00_STEAM",	new List<int> {9691136, 	0x45EC4A,	0}},
+		{"newsteam_r2",	new List<int> {9981952, 	0x7fff20,	0}}
 	};
 }
 
@@ -139,8 +199,6 @@ init
 	vars.enabled = true;
 	version = "";
 
-	int compareWithValue = 38079;
-	
 	// Getting process module size
 	int gameSize = modules.First().ModuleMemorySize;
 	
@@ -149,7 +207,7 @@ init
 	// Identifying game module version
 	foreach (var item in vars.gameVersions) 
 	{
-		if(gameSize == item.Value[0] || memory.ReadValue<int>(modules.First().BaseAddress + (int)item.Value[1]) == compareWithValue) 
+		if(gameSize == item.Value[0] || memory.ReadValue<int>(modules.First().BaseAddress + (int)item.Value[1]) == item.Value[2]) 
 		{
 			version = item.Key;
 			print("[GTASA LoadRemoval] Game version identified: " + item.Key + ".");
@@ -188,8 +246,20 @@ isLoading
 	// Checking if PAUSE MENU is active
 	if(current.playerInMenu != 0) return false;
 	
-	// Checking 
-	// TO-DO check CTimer::ms_fTimeStepOld and CTimer::ms_fTimeStep > 3 to detect lag
+	// Checking if player paused the game (Not needed, because ^ PAUSE MENU check is already used, but wouldn't hurt being careful)
+	if(current.userPause == 1) return false;
+	
+	// Checking if codePause? (Not needed, used only while checking game CD for audio)
+	if(current.codePause == 1) return false;
+	
+	// Checking if game is loading requested models
+	if(current.loadingModels == 1) return true;
+	
+	// Checking if game is loading scene
+	if(current.loadingScene == 1) return true;
+	
+	// Checking if fTimeStep values aren't normal (useful to detect lag)(game recalculates gametime if value is >= 3)
+	if(current.ms_fTimeStep < 1.0 || old.ms_fTimeStep < 1.0 || current.ms_fTimeStep >= 2.5 || old.ms_fTimeStep >= 2.5) return false;
 	
 	// Comparing previous and current global timer values
 	return current.globalGameTimer == old.globalGameTimer;
