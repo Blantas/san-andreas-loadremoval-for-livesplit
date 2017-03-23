@@ -5,7 +5,7 @@
  * @game	   Grand Theft Auto: San Andreas
  * @category   Load Time Removal
  * @author     Karolis Vaikutis <speedrun.com/user/Blantas>
- * @version    1.3
+ * @version    1.2
  * @link       https://github.com/Blantas/san-andreas-loadremoval-for-livesplit
 
  * @supported  1.00 EU/US
