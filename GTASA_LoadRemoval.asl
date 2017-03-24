@@ -5,7 +5,7 @@
  * @game	   Grand Theft Auto: San Andreas
  * @category   Load Time Removal
  * @author     Karolis Vaikutis <speedrun.com/user/Blantas>
- * @version    1.2
+ * @version    1.2.1
  * @link       https://github.com/Blantas/san-andreas-loadremoval-for-livesplit
 
  * @supported  1.00 EU/US
@@ -207,10 +207,11 @@ init
 	// Identifying game module version
 	foreach (var item in vars.gameVersions) 
 	{
-		if(gameSize == item.Value[0] || memory.ReadValue<int>(modules.First().BaseAddress + (int)item.Value[1]) == item.Value[2]) 
+		if(gameSize == item.Value[0] || (memory.ReadValue<int>(modules.First().BaseAddress + (int)item.Value[1]) == item.Value[2] && item.Value[2] != 0)) 
 		{
 			version = item.Key;
 			print("[GTASA LoadRemoval] Game version identified: " + item.Key + ".");
+			break;
 		}
 	}
 	
