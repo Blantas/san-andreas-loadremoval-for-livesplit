@@ -5,14 +5,15 @@
  * @game	   Grand Theft Auto: San Andreas
  * @category   Load Time Removal
  * @author     Karolis Vaikutis <speedrun.com/user/Blantas>
- * @version    1.2.1
+ * @version    1.3
  * @link       https://github.com/Blantas/san-andreas-loadremoval-for-livesplit
 
  * @supported  1.00 EU/US
                1.01 EU/US
-			   1.01 PL(?)
+               1.01 PL
                3.00 STEAM
-			   newsteam_r2
+               newsteam_r2
+               1.0.0.9 Windows Store
 			   
  * @todo	   Add support for German (1.0 and 1.01) versions.	   
  */
@@ -177,26 +178,49 @@ state("gta-sa", "newsteam_r2")
 	byte	loadingScene	: 0x5DD099;
 }
 
+/**
+ * San Andreas Windows Store
+ * Current version available in Windows Store
+*/
+
+state("GTASA", "1.0.0.9 (Windows Store)")
+{
+	int 	globalGameTimer : "GTASASCWin8Component.dll", 0x783DE0;
+	int 	gameState		: "GTASASCWin8Component.dll", 0x760470;
+	byte 	playerInMenu	: "GTASASCWin8Component.dll", 0x760174;
+	byte	hasFocus		: 0x0;
+	
+	byte	codePause		: "GTASASCWin8Component.dll", 0x783E1D;
+	byte	userPause		: "GTASASCWin8Component.dll", 0x783E1C;
+	
+	float	ms_fTimeStep	: "GTASASCWin8Component.dll", 0x783E0C;
+	
+	byte	loadingModels	: "GTASASCWin8Component.dll", 0x91CDCC;
+	byte	loadingScene	: "GTASASCWin8Component.dll", 0x91C99B;
+}
+
 startup
 {
 	// How often script checks game values
 	refreshRate = 20;
 	
 	// Version name, (module size, address to check while identifying version, version number)
+	
 	vars.gameVersions = new Dictionary<string,List<int>> {
-		{"1.00_US",		new List<int> {18313216, 	0x42457C,	38079}},
-		{"1.00_EU",		new List<int> {18313216, 	0x4245BC,	38079}},
-		{"1.01_US", 	new List<int> {34471936, 	0x4252FC,	38079}},
-		{"1.01_EU",		new List<int> {34471936, 	0x42533C,	38079}},
-		{"1.01_PL",		new List<int> {9621504, 	0x0		,	0}},
-		{"3.00_STEAM",	new List<int> {9691136, 	0x45EC4A,	0}},
-		{"newsteam_r2",	new List<int> {9981952, 	0x7fff20,	0}}
+		{"1.00_US",					new List<int> {18313216, 	0x42457C,	38079}},
+		{"1.00_EU",					new List<int> {18313216, 	0x4245BC,	38079}},
+		{"1.01_US", 				new List<int> {34471936, 	0x4252FC,	38079}},
+		{"1.01_EU",					new List<int> {34471936, 	0x42533C,	38079}},
+		{"1.01_PL",					new List<int> {9621504, 	0x0		,	0}},
+		{"3.00_STEAM",				new List<int> {9691136, 	0x45EC4A,	0}},
+		{"newsteam_r2",				new List<int> {9981952, 	0x7fff20,	0}},
+		{"1.0.0.9 (Windows Store)",	new List<int> {188416,		0x0,		0}}
 	};
 }
 
 init
 {
-	vars.enabled = true;
+	vars.enabled = true; 
 	version = "";
 
 	// Getting process module size
@@ -241,8 +265,11 @@ isLoading
 	// Checking game state (9 -> when gta.dat was loaded)
 	if(current.gameState != 9) return false;
 	
-	// Checking if game window has focus (helps detecting alttabing)
-	if(current.hasFocus != 1 || (current.hasFocus == 1 && old.hasFocus == 0)) return false;
+	if(version != "1.0.0.9 (Windows Store)")
+	{
+		// Checking if game window has focus (helps detecting alttabing)(not needed for Windows Store version because the game doesn't get paused if you alttab)
+		if(current.hasFocus != 1 || (current.hasFocus == 1 && old.hasFocus == 0)) return false;
+	}
 	
 	// Checking if PAUSE MENU is active
 	if(current.playerInMenu != 0) return false;
