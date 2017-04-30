@@ -29,9 +29,11 @@ The current version supports only:
 
 |           | 1.0 EU | 1.0 DE | 1.0 US | 1.01 EU | 1.01 DE | 1.01 PL? | 1.01 US | 2.0 | [3.0 STEAM](https://steamcommunity.com/app/12120/discussions/0/34096318964479523/) | r1 STEAM | [r2 STEAM](http://store.steampowered.com/app/12120/) | [WinStore](https://www.microsoft.com/en-us/store/p/grand-theft-auto-san-andreas/9wzdncrfj1zn) |
 |-----------|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|
-| Supported |    ✓   |    ?<sup>1</sup>   |    ✓   |    ✓    |    ?<sup>1</sup>   |      ✓      |    ✓    |     |  ✓  |             |      ✓      |      ✓      |
+| Supported |    ✓   |    ?<sup>1</sup>   |    ✓   |    ✓    |    ?<sup>1</sup>   |      ✓      |    ✓    |     |  ✓  |             |      ✓      |      ✓<sup>2</sup>      |
 
 <sup>1</sup> This version is probably supported but not tested.
+
+<sup>2</sup> Only current version 1.0.0.9 is supported.
 
 To-do:
 * Confirm if German versions work fine (1.0 DE, 1.01 DE).
